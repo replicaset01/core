@@ -1,0 +1,46 @@
+---------------------------------------------------------------------
+DIP,OCP르 위반한 코드 예시
+
+[인터페이스]
+
+[MemberService]
+void join(Member member)
+Member findMember(Long memberId)
+
+구현체 : MemberServiceImpl
+private final MemberRepository memberRepository = new MemoryMemberRepository();'
+join()
+findMember()
+
+
+[DiscountPolicy] 할인정책
+int discount(Member member, int price)
+
+구현체 : FixDiscountPolicy, RateDiscountPolicy
+private int discountFixAmount = 1000;
+
+public int discount(Member member, int price)
+
+[MemberRepository]
+void save(Member member)
+Member findById(Long memberId)
+
+구현체 : MemoryMemberRepository
+private static Map<Long, Member> store = new HashMap<>();
+save()
+findById()
+
+---------------------------------------------------------------------------
+DIP, OCP를 위반하지 않은 코드 예시
+
+[인터페이스]
+DiscountPolicy, MemberService, OrderService
+
+구현체(클라이언트) = 인터페이스만 의존 + 생성자
+
+[관심사분리] 구현객체를 Config에서 생성
+AppConfig 파일
+
+public 인터페이스 인터페이스() {
+ return new 구현체(new 의존관계인구현체)
+}
