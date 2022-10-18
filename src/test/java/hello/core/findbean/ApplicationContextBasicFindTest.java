@@ -30,8 +30,8 @@ public class ApplicationContextBasicFindTest {
     @DisplayName("빈 타입으로 조회")
     void findBeanByType() {
         MemberService memberService = ac.getBean(MemberService.class);
-//        System.out.println("memberService = " + memberService);
-//        System.out.println("memberService.getClass() = " + memberService.getClass());
+        System.out.println("memberService = " + memberService);
+        System.out.println("memberService.getClass() = " + memberService.getClass());
         //검증
         assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
     }
